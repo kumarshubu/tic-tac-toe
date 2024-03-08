@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react'
+import Board from './components/board/BoardOptimised'
+import Login from './components/login'
+import {gapi} from 'gapi-script'
+import {  BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
+import './App.css'
+export default function App() {
 
-function App() {
+  useEffect(()=>{
+    function start(){
+      gapi.client.init({
+        clientId:process.env.REACT_APP_CLIENT_ID,
+        scope:""
+      })
+    }
+    gapi.load('client:auth2',start)
+  },[])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/*" element={<Login />} />
+        <Route path="/game" element={<Board />} />
+      </Routes>
+    </Router>
+  )
 }
-
-export default App;
