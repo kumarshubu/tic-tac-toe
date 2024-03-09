@@ -4,7 +4,7 @@ import './style.css'
 const GoogleLoginButton = () => {
   const handleSuccess = (response) => {
     sessionStorage.setItem("token",response.accessToken)
-    window.location.href="/game"
+    window.location.href="/home"
   };
   const handleFailure = (response) => {
     console.log(response)
@@ -13,9 +13,9 @@ const GoogleLoginButton = () => {
     sessionStorage.removeItem('token')
   },[])
   return (
-    <div style={{flexDirection:"column", background:"linear-gradient(to top, rgb(183, 88, 88,1), rgb(48, 55, 229,0.9))"}} className='centerContent'>
+    <div className='centerContent'>
       <div style={{margin:"1rem"}}>
-        <img className='logo' src='/assets/logo.png'/>
+        <img className='logo' src='/assets/logo.png' alt=""/>
         <div style={{color:"#FEE3FD", fontWeight:"600"}}>Tic <span style={{color:"#FFF3FD"}}>Tac </span><span style={{color:"#FFF3FD"}}>Toe</span></div>
       </div>
       <GoogleLogin

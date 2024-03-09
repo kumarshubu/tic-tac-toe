@@ -2,5 +2,7 @@
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh
+    flex-direction: column;
+    height:100vh;
+    background:linear-gradient(to top, rgb(183, 88, 88,1), rgb(48, 55, 229,0.9))
 }

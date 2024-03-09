@@ -1,0 +1,65 @@
+.button {
+    /* display: inline-block; */
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    background: linear-gradient(to bottom, #3498db, #2980b9); /* Change the colors as needed */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    position: relative;
+}
+
+/* Light reflection effect */
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 50%;
+    background: rgba(255, 255, 255, 0.3); /* Adjust the opacity as needed */
+    border-radius: 5px 5px 0 0;
+}
+
+
+.button1 {
+    background: linear-gradient(to bottom, #3498db, #2980b9);
+}
+
+.button2 {
+    background: linear-gradient(to bottom, #e74c3c, #c0392b);
+}
+
+.button3 {
+    background: linear-gradient(to bottom, #2ecc71, #27ae60);
+}
+
+.button4 {
+    background: linear-gradient(to bottom, #f39c12, #d35400);
+}
+
+.button5 {
+    background: linear-gradient(to bottom, #9b59b6, #8e44ad);
+}
+
+.button6 {
+    background: linear-gradient(to bottom, #1abc9c, #16a085);
+}
+
+.button7 {
+    background: linear-gradient(to bottom, #34495e, #2c3e50);
+}
+
+.button8 {
+    background: linear-gradient(to bottom, #e67e22, #d35400);
+}
+
+.button9 {
+    background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+}
+
+.button10 {
+    background: linear-gradient(to bottom, #ecf0f1, #bdc3c7);
+}
