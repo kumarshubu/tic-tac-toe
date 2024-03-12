@@ -4,13 +4,14 @@ import './style.css'
 const GoogleLoginButton = () => {
   const handleSuccess = (response) => {
     sessionStorage.setItem("token",response.accessToken)
+    sessionStorage.setItem('userData',JSON.stringify(response.profileObj))
     window.location.href="/home"
   };
   const handleFailure = (response) => {
     console.log(response)
   }
   useEffect(()=>{
-    sessionStorage.removeItem('token')
+    sessionStorage.clear()
   },[])
   return (
     <div className='centerContent'>

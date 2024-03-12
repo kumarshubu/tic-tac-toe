@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import './style.css'
+import './style.css';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:8000');  
+
 function Board() {
   const [boardSize, setBoardSize] = useState(3);
   const [board, setBoard] = useState([]);
@@ -20,6 +24,32 @@ function Board() {
     player2:0,
     draw:0
   })
+  useEffect(() => {
+    let userData = sessionStorage.getItem('userData')
+    if(!userData){
+        window.location.href = "/"
+    } else {
+        userData = JSON.parse(userData)
+    }
+    socket.emit("join", { name:userData.name, room:"online", email:userData.email, password:"password" }, (error) => {
+      if (error) {
+        alert(error);
+      }
+    });
+    return () => {
+      socket.emit("disconnectUser");
+      socket.off();
+    };
+  }, []);
+
+  useEffect(() => {
+    socket.on("message", (message) => {
+      console.log(message)
+    });
+    socket.on("roomData", (message)=>{
+      console.log(message)
+    })
+  }, []);
   const resetBoard = () => {
     let tempBoard = new Array();
     for (let i = 0; i < boardSize; i++) {
@@ -29,6 +59,9 @@ function Board() {
   };
 
   const move = (player, row, col) => {
+    // socket.emit("sendMessage", "message", () => {
+    //   console.log("message sent")
+    // });
     if (getWinner() != -1 || remainingBoxes==0) {
       reinitializeBoard()
       document.getElementById('overlay').style.display='none'
@@ -133,6 +166,7 @@ function Board() {
   useEffect(()=>{
     loadLastSession()
   },[])
+
   return (
     <div className="centerContent container" style={{background:"linear-gradient(to top, rgb(255 236 236), rgb(0 159 255 / 90%))"}}>
       <div onClick={()=>{
@@ -146,6 +180,7 @@ function Board() {
       <div>
         {[0,1,2].map((p,index)=>
                   <div
+                  key={index}
                   style={{
                     height: "100px",
                     width: "300px",
@@ -153,10 +188,10 @@ function Board() {
                     borderTop: p==0 && "1px solid #000",
                     display: "flex",
                   }}
-                  key={index}
                 >
-                  {[{row:p,col:0}, {row:p,col:1}, {row:p,col:2}].map(t=>
+                  {[{row:p,col:0}, {row:p,col:1}, {row:p,col:2}].map((t,subIndex)=>
                     <div
+                    key={subIndex}
                     onClick={() => move(currentPlayer, t.row, t.col)}
                     style={{position:"relative" ,height: "100%", width: "100%", border: "1px solid #000" }}
                   >

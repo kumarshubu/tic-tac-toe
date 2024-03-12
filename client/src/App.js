@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import TwoPlayerBoard from './components/board/BoardOptimised'
+import BoardOnline from './components/boardOnline/Board'
 import Login from './components/login'
 import Home from './components/home'
 import {gapi} from 'gapi-script'
 import {  BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import './App.css'
+import LeaderBoard from './components/leaderBoard'
 export default function App() {
 
   useEffect(()=>{
@@ -32,9 +34,10 @@ export default function App() {
         <Route path="/*" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/twoPlayer" element={<TwoPlayerBoard />} />
+        <Route path="/online" element={<BoardOnline />} />
         {/* <Route path="/multiPlayer" element={<Board />} />
-        <Route path="/multiPlayerSuper" element={<Board />} />
-        <Route path="/leaderBoard" element={<Board />} /> */}
+        <Route path="/multiPlayerSuper" element={<Board />} /> */}
+        <Route path="/leaderBoard" element={<LeaderBoard />} />
       </Routes>
     </Router>
   )
